@@ -14,14 +14,14 @@ from fin_funcs.plot_spread import plot_spread
 if __name__ == "__main__":
 	#  Inputs
 	#   tick, start_date, end_date, freq
-	df_candl, plt = candlstkr(tick='^IXIC')
-	print(df_candl.head())
+	df_candl, plt = candlstkr(tick='RSX')
+	#print(df_candl.head())
 	plt.show()
 	#plt.clf()
 
 	#  Inputs
 	#   tickers=['A','B'], start_date, end_date, freq
-	#df_candl_ratio, plt = candlstkr_ratio(tickers=['DBC','SPY'])
+	#df_candl_ratio, plt = candlstkr_ratio(tickers=['TLT','SPY'], freq='W')
 	#plt.show()
 	#plt.clf()
 

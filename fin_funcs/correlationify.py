@@ -34,6 +34,7 @@ def correlationify(tickers = ['^TNX', '^GSPC'], start_date = '1998-01-01',
 	for i, row in df[df.Corr < threshold].iterrows():
 		plt.axvline(x=i, color='#79c879', alpha=0.2)
 
+	fig.tight_layout()
 	return df, plt
 
 
