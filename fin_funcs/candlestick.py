@@ -8,16 +8,17 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 from mpl_finance import candlestick_ohlc
 plt.style.use('ggplot')
-
 pd.option_context('display.max_rows', None, 'display.max_columns', 3)
 
 def candl_plt(df_resamp, title, bar_width):
 	fig, ax = plt.subplots()
 	ax.set_title(title)
 	# Code from https://ntguardian.wordpress.com/2016/09/19/introduction-stock-market-data-python-1/
-	candlestick_ohlc(ax, list(zip(list(mdates.date2num(df_resamp.index.tolist())), df_resamp["Open"].tolist(), df_resamp["High"].tolist(),
-					df_resamp["Low"].tolist(), df_resamp["Close"].tolist())),
-					colorup="green", colordown="red", width=bar_width)
+	candlestick_ohlc(ax, list(zip(list(mdates.date2num(df_resamp.index.tolist())),
+		df_resamp["Open"].tolist(), df_resamp["High"].tolist(),
+		df_resamp["Low"].tolist(), df_resamp["Close"].tolist())),
+		colorup="green", colordown="red", width=bar_width)
+	
 	# **************** Formatting graph parameters ****************
 	# Source: https://matplotlib.org/devdocs/gallery/api/date.html
 	years = mdates.YearLocator()   # every year
@@ -31,13 +32,15 @@ def candl_plt(df_resamp, title, bar_width):
 	ax.xaxis.set_major_locator(years)
 	ax.xaxis.set_major_formatter(yearsFmt)
 	ax.xaxis.set_minor_locator(months)
+	# *************************************************************
 	ax.grid(True)
+	fig.set_size_inches(16, 9)
 	fig.autofmt_xdate()
 	fig.tight_layout()
-	# *************************************************************
 	return plt
 
-def candlstkr(tick='^GSPC', start_date='1995-01-01', end_date=datetime.datetime.today().strftime('%Y-%m-%d'), freq='M'):
+def candlstkr(tick='^GSPC', start_date='1995-01-01',
+		end_date=datetime.datetime.today().strftime('%Y-%m-%d'), freq='M'):
 	if freq == 'M':
 		bar_width = 20
 	elif freq == 'W':
@@ -60,7 +63,8 @@ def candlstkr(tick='^GSPC', start_date='1995-01-01', end_date=datetime.datetime.
 	plt = candl_plt(df_resamp, candl_title, bar_width)
 	return df_resamp, plt
 
-def candlstkr_ratio(tickers=['^GSPC', '^TYX'], start_date='1995-01-01', end_date=datetime.datetime.today().strftime('%Y-%m-%d'), freq='M'):
+def candlstkr_ratio(tickers=['^GSPC', '^TYX'], start_date='1995-01-01',
+		end_date=datetime.datetime.today().strftime('%Y-%m-%d'), freq='M'):
 	if freq == 'M':
 		bar_width = 20
 	elif freq == 'W':
@@ -84,15 +88,4 @@ def candlstkr_ratio(tickers=['^GSPC', '^TYX'], start_date='1995-01-01', end_date
 	candl_title = tickers[0] + ' to ' + tickers[1] + ' ratio from ' + start_date + ' to ' + end_date
 	plt = candl_plt(df_resamp, candl_title, bar_width)
 	return df_resamp, plt
-	
 
-
-if __name__ == "__main__":
-	#df, plt = candlstkr(tick='^RUT')
-	#plt.show()
-
-	#df, plt = candlstkr_ratio()
-	#print df.head()
-	#plt.show()
-
-	#print df.head()

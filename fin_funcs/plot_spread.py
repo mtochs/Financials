@@ -20,6 +20,7 @@ def plot_spread(tickers=['^IRX','^TYX'], start_date='1995-01-01',
 	df.diff.plot(color='#5687d4')
 	# Horizontal line at last data point
 	plt.axhline(y=last, color='#d62728')
+	fig.set_size_inches(16, 9)
 	fig.tight_layout()
 	return df,plt
 
