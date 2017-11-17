@@ -20,7 +20,7 @@ def corr_data(tickers, start_date, end_date, freq, rolling_corr):
 	df_r.dropna()
 	return df_r
 
-def correlationify(tickers = ['^TNX', '^GSPC'], start_date = '1998-01-01',
+def correlationify(tickers = ['^TNX', '^GSPC'], start_date = '1994-01-01',
 		end_date = datetime.datetime.today().strftime('%Y-%m-%d'),
 		freq='W', rolling_corr = 40, threshold=-0.65):
 	
@@ -33,7 +33,8 @@ def correlationify(tickers = ['^TNX', '^GSPC'], start_date = '1998-01-01',
 
 	for i, row in df[df.Corr < threshold].iterrows():
 		plt.axvline(x=i, color='#79c879', alpha=0.2)
-		
+
+	plt.title('10-year yield to S&P500 ' + str(rolling_corr) + '-week correlation')
 	fig.set_size_inches(16, 9)
 	fig.tight_layout()
 	return df, plt

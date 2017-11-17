@@ -26,7 +26,7 @@ def delete_file(f):
 	except OSError:
 		pass
 
-def grab_factbook(all = False):
+def grab_factbook(all=True):
 	if (all == True):
 		dls = "http://www.nyxdata.com/nysedata/asp/factbook/table_export_csv.asp?mode=tables&key=50"
 	else:
@@ -43,7 +43,7 @@ def purge_files():
 def compare_factbooks():
 	purge_files()
 	# Download new copy of factbook
-	grab_factbook(all = True)
+	grab_factbook()
 	factbook_s3_w_dir = add_margin_debt_dir(factbook_web)
 	s3.Bucket(BUCKET_NAME).download_file(factbook_s3_w_dir, factbook_s3)
 	return filecmp.cmp(factbook_web, factbook_s3)

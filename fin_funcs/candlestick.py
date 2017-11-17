@@ -39,8 +39,12 @@ def candl_plt(df_resamp, title, bar_width):
 	fig.tight_layout()
 	return plt
 
-def candlstkr(tick='^GSPC', start_date='1995-01-01',
+def candlstkr(tick='^GSPC', title='', start_date='1995-01-01',
 		end_date=datetime.datetime.today().strftime('%Y-%m-%d'), freq='M'):
+	
+	if title == '':
+		title = tick
+	
 	if freq == 'M':
 		bar_width = 20
 	elif freq == 'W':
@@ -59,12 +63,16 @@ def candlstkr(tick='^GSPC', start_date='1995-01-01',
 	# Update start_date for plt publishing
 	start_date = df_resamp.index.min().strftime('%m/%d/%y')
 
-	candl_title = tick + ' from ' + start_date + ' to ' + end_date
+	candl_title = title + ' from ' + start_date + ' to ' + end_date
 	plt = candl_plt(df_resamp, candl_title, bar_width)
 	return df_resamp, plt
 
-def candlstkr_ratio(tickers=['^GSPC', '^TYX'], start_date='1995-01-01',
-		end_date=datetime.datetime.today().strftime('%Y-%m-%d'), freq='M'):
+def candlstkr_ratio(tickers=['^GSPC', '^TYX'], title='', start_date='1995-01-01',
+		end_date=datetime.datetime.today().strftime('%Y-%m-%d'), freq='M',):
+	
+	if title == '':
+		title = tickers[0] + ' to ' + tickers[1] + ' ratio'
+	
 	if freq == 'M':
 		bar_width = 20
 	elif freq == 'W':
@@ -85,7 +93,10 @@ def candlstkr_ratio(tickers=['^GSPC', '^TYX'], start_date='1995-01-01',
 	# Update start_date for plt publishing
 	start_date = df_resamp.index.min().strftime('%m/%d/%y')
 
-	candl_title = tickers[0] + ' to ' + tickers[1] + ' ratio from ' + start_date + ' to ' + end_date
+	candl_title = title + ' from ' + start_date + ' to ' + end_date
 	plt = candl_plt(df_resamp, candl_title, bar_width)
 	return df_resamp, plt
 
+if __name__ == "__main__":
+	df, plt = candlstkr_ratio()
+	plt.show()
