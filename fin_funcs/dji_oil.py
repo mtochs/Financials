@@ -43,17 +43,5 @@ def dji_oil(freq='M', start_date = '1986-01-01',
 
 
 if __name__ == "__main__":
-	'''
-	from fredapi import Fred
-	# Previous way to grab fred data before using pdr's 'web'
-	fred = Fred(api_key='e37f5aff803c4bc3c4f2b727bd5d9f70')
-	oil = fred.get_series('DCOILWTICO')
-	# Convert to pandas dataframe
-	oil = pd.DataFrame({
-		'Date':oil.keys().tolist(),
-		'oil':oil.tolist() })
-	oil.set_index('Date', inplace=True)
-	'''
-
 	df, plt = dji_oil()
 	plt.show()

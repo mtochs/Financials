@@ -10,7 +10,7 @@ from fin_funcs.candlestick import candlstkr, candlstkr_ratio
 from fin_funcs.correlationify import correlationify
 from fin_funcs.dji_oil import dji_oil
 from fin_funcs.margin_debt import update_margin_debt_s3 
-from fin_funcs.plot_spread import plot_spread
+from fin_funcs.plot_spread import plot_spread, yieldr
 
 candls = [
 		['^IXIC', 'candls_NASDAQ'], 
@@ -30,12 +30,12 @@ ratios = [
 	]
 
 spreads = [
-		['^IRX','^FVX', 'tspread_00-10.png'],
-		['^IRX','^TNX', 'tspread_00-10.png'],
-		['^IRX','^TYX', 'tspread_00-30.png'],
-		['^FVX','^TNX', 'tspread_05-10.png'],
-		['^FVX','^TYX', 'tspread_05-30.png'],
-		['^TNX','^TYX', 'tspread_10-30.png']
+		['^IRX','^FVX', 'tspread_00-10'],
+		['^IRX','^TNX', 'tspread_00-10'],
+		['^IRX','^TYX', 'tspread_00-30'],
+		['^FVX','^TNX', 'tspread_05-10'],
+		['^FVX','^TYX', 'tspread_05-30'],
+		['^TNX','^TYX', 'tspread_10-30']
 	]
 
 def make_candls(d):
@@ -56,6 +56,9 @@ def make_plot_spreads(d):
 	for i in d:
 		df, plt = plot_spread(tickers=i[0:2], start_date='1990-01-01')
 		aws.upload_plt(plt, i[2] + '.png', save_local=True)
+	# Make chart with all yields showing
+	df, plt = yieldr()
+	aws.upload_plt(plt, 'tyields.png', save_local=True)
 
 def make_dji_oil():
 	df_oil,oil_plt = dji_oil()
@@ -74,8 +77,8 @@ def update_charts():
 
 
 if __name__ == "__main__":
-	df = update_margin_debt_s3()
-	#update_charts()
+	#df = update_margin_debt_s3()
+	update_charts()
 
 	#  Inputs
 	#   tick, start_date, end_date, freq
@@ -95,6 +98,6 @@ if __name__ == "__main__":
 
 	#  Inputs
 	#   tickers=['A','B'], start_date, end_date
-	#df_spread, plt = plot_spread(tickers=['^FVX','^TYX'], start_date='1990-01-01')
-	#print(df_spread.tail(10))
+	df_spread, plt = plot_spread(tickers=['^FVX','^TYX'], start_date='1990-01-01')
+	print(df_spread.tail(10))
 	#plt.show(), plt.clf()

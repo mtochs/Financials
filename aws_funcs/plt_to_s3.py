@@ -44,7 +44,7 @@ def upload_plt(plt, file_key, save_local=False):
 	if save_local == True: 
 		plt.savefig(file_key)
 		print("Plt saved locally: ", file_key)
-	plt.clf()
+	plt.clf(), plt.close('all')
 
 
 #print(bucket_file_exists(BUCKET_NAME, 'margin_debt/md_balances.png'))
