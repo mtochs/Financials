@@ -30,8 +30,10 @@ def dji_oil(freq='M', oil_shift=10, start_date = '1980-01-01',
 	# Resample data to reduce static
 	df = df.resample(freq).mean()
 
-	# Cap df at end_date parameter and collect min, max for chart
-	df = df[df.index < end_date]
+	# Cap df at end_date parameter
+	if end_date != datetime.today().strftime('%Y-%m-%d'):
+		df = df[df.index < end_date]
+	# Collect min, max for chart
 	x_min, x_max = df.index.min(), df.index.max()
 
 	# Create plot
@@ -54,5 +56,5 @@ def dji_oil(freq='M', oil_shift=10, start_date = '1980-01-01',
 
 
 if __name__ == "__main__":
-	df, plt = dji_oil(start_date='2015-01-01', end_date='2022-01-01', oil_shift=9)
-	#plt.show()
+	df, plt = dji_oil()
+	plt.show()
