@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
@@ -10,7 +10,7 @@ import pandas_datareader.data as web
 plt.style.use('ggplot')
 
 def dji_oil(freq='M', start_date = '1986-01-01', 
-		end_date = datetime.datetime.today().strftime('%Y-%m-%d')):
+		end_date = datetime.today().strftime('%Y-%m-%d')):
 	
 	# Collect daily oil data from St Louis Fed
 	oil = web.DataReader('DCOILWTICO', 'fred', start_date, end_date)

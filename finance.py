@@ -9,7 +9,7 @@ import  aws_funcs.plt_to_s3 as aws
 from fin_funcs.candlestick import candlstkr, candlstkr_ratio
 from fin_funcs.correlationify import correlationify
 from fin_funcs.dji_oil import dji_oil
-from fin_funcs.margin_debt import update_margin_debt_s3 
+from fin_funcs.margin_debt import margin_debt_all, margin_debt_yoy, margin_debt_net
 from fin_funcs.plot_spread import plot_spread, yieldr
 
 candls = [
@@ -68,12 +68,21 @@ def make_corr():
 	df_corr, corr_plt = correlationify()
 	aws.upload_plt(corr_plt, 'corr_sp500_10yr.png', save_local=True)
 
+def make_margin_debt():
+	df, plt = margin_debt_all()
+	aws.upload_plt(plt, 'md_bal_all.png', save_local=True)
+	df, plt = margin_debt_yoy()
+	aws.upload_plt(plt, 'md_bal_yoy.png', save_local=True)
+	df, plt = margin_debt_net()
+	aws.upload_plt(plt, 'md_bal_net.png', save_local=True)
+
 def update_charts():
 	make_candls(candls)
 	make_candls_ratios(ratios)
 	make_plot_spreads(spreads)
 	make_dji_oil()
 	make_corr()
+	make_margin_debt()
 
 
 if __name__ == "__main__":
@@ -99,5 +108,5 @@ if __name__ == "__main__":
 	#  Inputs
 	#   tickers=['A','B'], start_date, end_date
 	df_spread, plt = plot_spread(tickers=['^FVX','^TYX'], start_date='1990-01-01')
-	print(df_spread.tail(10))
+	print(df_spread.tail(5))
 	#plt.show(), plt.clf()
