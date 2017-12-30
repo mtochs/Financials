@@ -1,4 +1,5 @@
 from __future__ import print_function
+from config import *
 import filecmp, io, os, urllib
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
@@ -27,7 +28,7 @@ def bucket_file_exists(file_key):
 	    exists = True
 	return exists
 
-def upload_plt(plt, file_key, save_local=False):
+def upload_plt(plt, file_key, save_local=False, save_dir=local_dir):
 	# Convert plt to bin for upload to S3
 	img_data = io.BytesIO()
 	plt.savefig(img_data, format='png')
@@ -42,7 +43,8 @@ def upload_plt(plt, file_key, save_local=False):
 	print("New plt uploaded: ", file_key)
 	# Clear plt
 	if save_local == True: 
-		plt.savefig(file_key)
+		#plt.savefig("C:\\Users\mykel\\Documents\\GitHub\\Financials\\" + file_key)
+		plt.savefig(save_dir + file_key)
 		print("Plt saved locally: ", file_key)
 	plt.clf(), plt.close('all')
 

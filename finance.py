@@ -86,13 +86,12 @@ def update_charts():
 
 
 if __name__ == "__main__":
-	#df = update_margin_debt_s3()
 	update_charts()
 
 	#  Inputs
 	#   tick, start_date, end_date, freq
-	#df, plt = candlstkr(tick='^GSPC', start_date='1990-01-01')
-	#plt.show()
+	#df, plt = candlstkr(tick='^DJI', start_date='1990-01-01')
+	#plt.show(), plt.clf()
 
 	#  Inputs
 	#   tickers=['A','B'], start_date, end_date, freq
@@ -107,6 +106,8 @@ if __name__ == "__main__":
 
 	#  Inputs
 	#   tickers=['A','B'], start_date, end_date
+	#df_spread, plt = plot_spread(tickers=['^IRX','^TNX'], start_date='1990-01-01')
+	#print(df_spread.tail(3))
 	df_spread, plt = plot_spread(tickers=['^FVX','^TYX'], start_date='1990-01-01')
 	print(df_spread.tail(5))
 	#plt.show(), plt.clf()
