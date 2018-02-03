@@ -17,7 +17,14 @@ candls = [
 		['^GSPC', 'candls_SP500'],
 		['^DJI', 'candls_DJI'],
 		['^TYX', 'candls_30yr'],
-		['^RUT', 'candls_Russel2000']
+		['^RUT', 'candls_Russel2000'],
+		['AMZN', 'candls_AMZN'],
+		['FB', 'candls_FB'],
+		['GOOGL', 'candls_GOOGL'],
+		['MSFT', 'candls_MSFT'],
+		['NFLX', 'candls_NFLX'],
+		['NVDA', 'candls_NVDA'],
+		['SMH', 'candls_SMH']
 	]
 
 ratios = [
@@ -86,28 +93,30 @@ def update_charts():
 
 
 if __name__ == "__main__":
-	update_charts()
-
 	#  Inputs
 	#   tick, start_date, end_date, freq
-	#df, plt = candlstkr(tick='^DJI', start_date='1990-01-01')
-	#plt.show(), plt.clf()
+	#df, plt = candlstkr(tick='USO', start_date='2007-01-01')
+	#df, plt = candlstkr(tick='DBC', start_date='2007-01-01')
 
 	#  Inputs
 	#   tickers=['A','B'], start_date, end_date, freq
-	#df_candl_ratio, plt = candlstkr_ratio(tickers=['RSX','DBC'])
-	#plt.show(), plt.clf()
+	#df_candl_ratio, plt = candlstkr_ratio(tickers=['GSG','SPY'])
+	#df_candl_ratio, plt = candlstkr_ratio(tickers=['SPY','RSP'])  # S&P to S&P Equal wt
 	
 	#  Inputs
 	#   tickers=['A','B'], start_date, end_date
 	#   freq, rolling_corr, threshold
 	#df_corr, plt = correlationify()
-	#plt.show(), plt.clf()
 
 	#  Inputs
 	#   tickers=['A','B'], start_date, end_date
 	#df_spread, plt = plot_spread(tickers=['^IRX','^TNX'], start_date='1990-01-01')
 	#print(df_spread.tail(3))
-	df_spread, plt = plot_spread(tickers=['^FVX','^TYX'], start_date='1990-01-01')
-	print(df_spread.tail(5))
+	#df_spread, plt = plot_spread(tickers=['^FVX','^TYX'], start_date='2018-01-01')
+	#print(df_spread.tail(10))
+	#df_spread, plt = plot_spread(tickers=['^TNX','^TYX'], start_date='2018-01-01')
+	#print(df_spread.tail(10))
+	
 	#plt.show(), plt.clf()
+	make_margin_debt()
+	#update_charts()

@@ -43,5 +43,9 @@ def dji_oil(freq='M', start_date = '1986-01-01',
 
 
 if __name__ == "__main__":
-	df, plt = dji_oil()
-	plt.show()
+	df, plt = dji_oil(start_date='2005-01-01', end_date='2010-01-01')
+	#plt.show()
+	print df.head()
+	print df[df.oil == df.oil.min()]
+	print df[df.oil == df.oil.max()]
+	print (df.oil.min() - df.oil.max()) / df.oil.max()
