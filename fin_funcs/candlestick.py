@@ -33,6 +33,7 @@ def candl_plt(df_resamp, title, bar_width):
 	ax.xaxis.set_major_formatter(yearsFmt)
 	ax.xaxis.set_minor_locator(months)
 	# *************************************************************
+	#ax.set_yscale('log')   # Set yscale to log
 	ax.grid(True)
 	fig.set_size_inches(16, 9)
 	fig.autofmt_xdate()
@@ -98,5 +99,5 @@ def candlstkr_ratio(tickers=['^GSPC', '^TYX'], title='', start_date='1995-01-01'
 	return df_resamp, plt
 
 if __name__ == "__main__":
-	df, plt = candlstkr_ratio()
+	df, plt = candlstkr()
 	plt.show()

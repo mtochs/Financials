@@ -36,14 +36,15 @@ def finra_tables():
 	df_finra_update = df_finra_update.set_index('Date')
 	# Drop all empty data rows
 	df_finra_update = df_finra_update[np.isfinite(df_finra_update)]
+	##########################################df_current_year.isin(df_finra_update))
 	return df_finra_update
 
 def df_margin_debt():
-	df = pd.read_pickle(pickle_file) 
+	df = pd.read_pickle(pickle_file)
 	df_finra_update = finra_tables()
-	df.update(df_finra_update)
-	df.to_pickle(pickle_file)
-	return df
+	df_final = df.combine_first(df_finra_update)
+	df_final.to_pickle(pickle_file)
+	return df_final
 
 # Quandl function is obsolete in favor of FINRA scrubbing method
 # NYSE no longer updates margin debt as of December 2017
@@ -105,6 +106,6 @@ def margin_debt_net(start_date = start_date_default, end_date = end_date_default
 
 
 if __name__ == "__main__":
-	df, plt = margin_debt_yoy() #margin_debt_net() margin_debt_yoy() margin_debt_all()
-	#print(df.tail())
-	plt.show()
+	df, plt = margin_debt_all() #margin_debt_all margin_debt_yoy margin_debt_net
+	print(df.tail())
+	#plt.show()

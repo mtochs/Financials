@@ -20,19 +20,21 @@ def get_peaks(freq='M', tick='^GSPC', start_date = '1986-01-01',
 	close_max = df[df.Close == df.Close.max()]['Close']
 	low_min = df[df.Low == df.Low.min()]['Low']
 	close_min = df[df.Close == df.Close.min()]['Close']
+	diff = (low_min - high_max) / high_max
 	print "\nhigh max: \n", high_max
 	print "\nclose max: \n", close_max
 	print "\nlow min: \n", low_min
 	print "\nclose min: \n", close_min
-	print "\ndiff: ", (low_min - high_max) / high_max
+	print "\ndiff: ", diff
 	
 	return df
 
-def gains_by_threshold(freq='D', tick='^GSPC', threshold=0, start_date = '2010-01-01', 
+def chg_by_threshold(freq='D', tick='^GSPC', threshold=0, start_date = '2010-01-01', 
 		end_date = datetime.today().strftime('%Y-%m-%d')):
 	
 	# Get S&P data
 	df = pdr.get_data_yahoo(symbols=tick, start=start_date, end=end_date)['Close']
+	# Converts into daily precent change
 	df = df.pct_change()
 	df = df[df.abs() > threshold]
 	return df
@@ -40,5 +42,6 @@ def gains_by_threshold(freq='D', tick='^GSPC', threshold=0, start_date = '2010-0
 
 if __name__ == "__main__":
 	#df = get_peaks(start_date='1999-01-01', end_date='2003-12-01')
-	df = gains_by_threshold(threshold=0.015)
+	
+	df = chg_by_threshold(threshold=0.01)
 	print df.tail(20)

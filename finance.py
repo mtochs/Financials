@@ -95,12 +95,12 @@ def update_charts():
 if __name__ == "__main__":
 	#  Inputs
 	#   tick, start_date, end_date, freq
-	#df, plt = candlstkr(tick='USO', start_date='2007-01-01')
+	#df, plt = candlstkr(tick='SMH', start_date='2007-01-01')
 	#df, plt = candlstkr(tick='DBC', start_date='2007-01-01')
 
 	#  Inputs
 	#   tickers=['A','B'], start_date, end_date, freq
-	#df_candl_ratio, plt = candlstkr_ratio(tickers=['GSG','SPY'])
+	#df_candl_ratio, plt = candlstkr_ratio(tickers=['VWO','SPY'])
 	#df_candl_ratio, plt = candlstkr_ratio(tickers=['SPY','RSP'])  # S&P to S&P Equal wt
 	
 	#  Inputs
@@ -112,11 +112,13 @@ if __name__ == "__main__":
 	#   tickers=['A','B'], start_date, end_date
 	#df_spread, plt = plot_spread(tickers=['^IRX','^TNX'], start_date='1990-01-01')
 	#print(df_spread.tail(3))
-	#df_spread, plt = plot_spread(tickers=['^FVX','^TYX'], start_date='2018-01-01')
-	#print(df_spread.tail(10))
-	#df_spread, plt = plot_spread(tickers=['^TNX','^TYX'], start_date='2018-01-01')
-	#print(df_spread.tail(10))
+	
+	
+	df_spread, plt = plot_spread(tickers=['^FVX','^TYX'], start_date='2018-01-01')
+	print(df_spread.tail(10))
+	df_spread, plt = plot_spread(tickers=['^TNX','^TYX'], start_date='2018-01-01')
+	print(df_spread.tail(10))
+	
 	
 	#plt.show(), plt.clf()
-	make_margin_debt()
-	#update_charts()
+	update_charts()
